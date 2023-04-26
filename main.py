@@ -37,7 +37,7 @@ def convert(message: telebot.types.Message):
         if len(values) != 3:
             raise APIException('Должно быть ровно 3 параметра!')
 
-        quote, base, amount = values
+        quote, base, amount = map(str.lower, values)
         total_base = CryptoConverter.get_price(quote, base, amount)
     except APIException as e:
         bot.reply_to(message, f'Ошибка пользователя.\n{e}')
