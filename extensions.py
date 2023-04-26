@@ -22,7 +22,7 @@ class CryptoConverter:
         try:
             base_ticker = keys[base]
         except KeyError:
-            raise APIException(f'Не удалось обработать валюту {quote}')
+            raise APIException(f'Не удалось обработать валюту {base}')
 
         try:
             amount = float(amount)
@@ -33,7 +33,7 @@ class CryptoConverter:
             raise APIException(f'Отрицательное количество валюты?')
 
         if amount >= 10**12:
-            raise APIException(f'Хочешь увидеть представление числа экспоненциальном формате?')
+            raise APIException(f'Хочешь увидеть представление числа в экспоненциальном формате?')
 
         r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={quote_ticker}&tsyms={base_ticker}')
         total_base = json.loads(r.content)[keys[base]]
